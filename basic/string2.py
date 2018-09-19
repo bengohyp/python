@@ -1,4 +1,4 @@
-#!/usr/bin/python2.4 -tt
+#!/usr/bin/python -tt
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -16,8 +16,11 @@
 # If the string length is less than 3, leave it unchanged.
 # Return the resulting string.
 def verbing(s):
-  # +++your code here+++
-  return
+  if len(s) <= 3: result = s
+  else:
+    if s[-3:] == 'ing': result = s + 'ly'
+    else: result = s + 'ing'
+  return result
 
 
 # E. not_bad
@@ -29,8 +32,14 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-  # +++your code here+++
-  return
+  not_index = s.find('not')
+  bad_index = s.find('bad')
+  if not_index > bad_index: result = s
+  else:
+    str_head = s[:not_index]
+    str_tail = s[bad_index+3:]
+    result = str_head + 'good' + str_tail
+  return result
 
 
 # F. front_back
@@ -41,8 +50,19 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-  # +++your code here+++
-  return
+  def front_half(s):
+    if len(s) % 2 == 1: #length is odd
+      result = s[:(len(s) / 2) + 1]
+    else:
+      result = s[:len(s) / 2]
+    return result
+  def back_half(s):
+    if len(s) % 2 == 1: #length is odd
+      result = s[(len(s) / 2) + 1:]
+    else:
+      result = s[len(s) / 2:]
+    return result
+  return front_half(a) + front_half(b) + back_half(a) + back_half(b)
 
 
 # Simple provided test() function used in main() to print

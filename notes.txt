@@ -1,0 +1,2 @@
+#allow python files to be run with ./hello.py
+chmod +x hello.py
